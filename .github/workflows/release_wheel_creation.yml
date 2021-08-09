@@ -1,14 +1,14 @@
 name: Pyomo Release Distribution Creation
 
-on:
-  push:
-    tags:
-      - '*'
-  workflow_dispatch:
-    inputs:
-      git-ref:
-        description: Git Hash (Optional)
-        required: false
+on: push
+  #push:
+    #tags:
+    #  - '*'
+  #workflow_dispatch:
+  #  inputs:
+  #    git-ref:
+  #      description: Git Hash (Optional)
+  #      required: false
 
 jobs:
   manylinux:
