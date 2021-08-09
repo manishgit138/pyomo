@@ -18,11 +18,12 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
+        TARGET: [manylinuxaarch64]
         include:
         - os: ubuntu-latest
           TARGET: manylinux
-        - os: ubuntu-latest
-          TARGET: manylinuxaarch64
+        #- os: ubuntu-latest
+        #  TARGET: manylinuxaarch64
         python-version: [3.7]
     steps:
     - uses: actions/checkout@v2
