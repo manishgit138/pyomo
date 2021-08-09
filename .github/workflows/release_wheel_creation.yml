@@ -61,7 +61,7 @@ jobs:
         sudo find . -name \*.whl | grep -v /dist/ | xargs -n1 -i mv -v "{}" dist/
     - name: Delete linux wheels
       run: |
-        sudo rm -rfv dist/*-linux_x86_64.whl
+        sudo rm -rfv dist/*-linux_*64.whl
     - name: Upload artifact
       uses: actions/upload-artifact@v1
       with:
