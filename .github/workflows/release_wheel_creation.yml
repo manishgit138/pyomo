@@ -21,6 +21,8 @@ jobs:
         include:
         - os: ubuntu-latest
           TARGET: manylinux
+        - os: ubuntu-latest
+          TARGET: manylinuxaarch64
         python-version: [3.7]
     steps:
     - uses: actions/checkout@v2
@@ -33,6 +35,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install twine wheel setuptools
     - name: Build manylinux Python wheels
+      if: ${{ matrix.TARGET == 'manylinux' }}
       uses: RalfG/python-wheels-manylinux-build@v0.3.3-manylinux2010_x86_64
       with:
         python-versions: 'cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39'
@@ -40,6 +43,14 @@ jobs:
         package-path: ''
         pip-wheel-args: ''
         # When locally testing, --no-deps flag is necessary (PyUtilib dependency will trigger an error otherwise)
+    - name: Build manylinux Python wheels
+      if: ${{ matrix.TARGET == 'aarch64' }}
+      uses: RalfG/python-wheels-manylinux-build@v0.3.3-manylinux2014_aarch64
+      with:
+        python-versions: 'cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39'
+        build-requirements: 'cython'
+        package-path: ''
+        pip-wheel-args: ''
     - name: Consolidate wheels
       run: |
         sudo test -d dist || mkdir -v dist
